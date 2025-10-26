@@ -1,0 +1,49 @@
+# Первым действием в окне Ubuntu создается рабочая директория для FROST
+mkdir frost-server
+cd frost-server
+# Файл compose.yml для параметров создается в директории и заполняется через Nano:
+nano compose.yml
+
+Основными параметрами для замены становятся:
+SERVICE_ROOT_URL – ссылка на сервер 
+persistence_db_password, POSTGRES_PASSWORD – пароль для входа
+
+# Сборка контейнеров для запуска FROST
+# Запуск контейнеров
+docker-compose up -d
+# Остановка контейнеров
+docker-compose down
+# Проверка статуса
+docker-compose ps
+
+Сессию нужно создавать один раз, и внутри нее можно работать с несколькими экранами.
+Можно создавать любое количество окон через Ctrl+A, Ctrl+C.
+Все команды по управлению контейнерами FROST делаются из любого из окон.
+Чтобы отключиться от окна/сессии, нужно нажать Ctrl-A, Ctrl-D, это переход в основной терминал хоста Linux.
+Если еще раз нажать Ctrl+A, Ctrl+D, произойдет отключение от SSH-сессии.
+# Создание сессии и ее название (geosensors)
+screen -S geosensors
+# Подключение к существующей сессии
+screen -r
+
+# Проверка через просмотр контейнеров
+docker ps
+Все контейнеры FROST-Server должны иметь статус Up
+# Проверка через логи FROST и PostgeSQL
+docker logs [frost_container_name] --tail 50
+docker logs [postgres_container_name] --tail 20
+Выводятся сообщения как "FROST-Server started successfully" или "Server running on port" или "PostgreSQL init process complete".
+# Проверка основного endpoint
+curl -v http://localhost:8080/FROST-Server
+# Проверка API версии
+curl http://localhost:8080/FROST-Server/v1.1
+HTTP статус должен быть 200 и должен быть ответ с информацией о сервере во втором случае.
+#Проверка прослушивания портов
+netstat -tlnp | grep 8080
+netstat -tlnp | grep 5432 
+# Потребление памяти контейнерами
+docker stats --no-stream
+# Проверка дискового пространства
+df -h
+
+

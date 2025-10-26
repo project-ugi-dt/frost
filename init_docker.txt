@@ -1,0 +1,14 @@
+# Установка Docker
+sudo apt install -y docker.io
+# Добавление пользователя в группу docker
+sudo usermod -aG docker $USER
+# Запуск Docker
+sudo systemctl enable docker
+sudo systemctl start docker
+# Установка Docker Compose
+sudo apt install -y docker-compose
+# убедиться, что Docker запускается автоматически при старте системы
+# 1. получить список демонов, найти название демона docker (например, docker.service):
+sudo systemctl list-units --type=service --state=active
+# 2. зная название демона docker, выполнить настройку:
+sudo systemctl enable docker.service
