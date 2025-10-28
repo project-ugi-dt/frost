@@ -1,0 +1,11 @@
+# compose.yml
+serviceRootUrl=http://90.156.134.128:8080/FROST-Server/
+persistence_db_password=/97Moh%@wZ2
+POSTGRES_PASSWORD=/97Moh%@wZ2
+
+# ssh доступ
+ssh root@90.156.134.128
+password=/97Moh%@wZ2
+
+# postgres
+password=QpPYsTHJ3VqT
