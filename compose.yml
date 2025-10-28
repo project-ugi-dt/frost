@@ -3,14 +3,14 @@ services:
     image: fraunhoferiosb/frost-server:latest
     environment:
       # For all settings see: https://fraunhoferiosb.github.io/FROST-Server/settings/settings.html
-      - serviceRootUrl=http://172.20.243.8:8080/FROST-Server
+      - serviceRootUrl=http://<your_server_id>/FROST-Server
       - plugins_multiDatastream.enable=false
       - http_cors_enable=true
       - http_cors_allowed_origins=*
       - persistence_db_driver=org.postgresql.Driver
       - persistence_db_url=jdbc:postgresql://database:5432/sensorthings
       - persistence_db_username=sensorthings
-      - persistence_db_password=0505
+      - persistence_db_password=<your_password>
       - persistence_autoUpdateDatabase=true
     ports:
       - 8080:8080
@@ -24,7 +24,7 @@ services:
     environment:
       - POSTGRES_DB=sensorthings
       - POSTGRES_USER=sensorthings
-      - POSTGRES_PASSWORD=0505
+      - POSTGRES_PASSWORD=<your_password>
     volumes:
       - postgis_volume:/var/lib/postgresql/data
     healthcheck:
